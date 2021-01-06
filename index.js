@@ -34,7 +34,7 @@ function body_parser(req, res, next) {
 app.use(body_parser);
 
 app.post('/logs', function(req, res) {
-  log_headers(req, ['Host', 'Con' ,'Content-Type' ,'Logplex-Msg-Count' ,'Logplex-Frame-Id' ,'Logplex-Drain-Token' ,'User-Agent' ,'Content-Length' ,'Connection']);
+ // log_headers(req, ['Host', 'Con' ,'Content-Type' ,'Logplex-Msg-Count' ,'Logplex-Frame-Id' ,'Logplex-Drain-Token' ,'User-Agent' ,'Content-Length' ,'Connection']);
   log_body(req.logplexLogs);
   res.send(201);
 });
