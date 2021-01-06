@@ -1,5 +1,6 @@
 var express = require('express'),
     app = express();
+var bodyParser = require('body-parser')
 
 function log_body(body) {
 //  if (process.env.LOG_BODY) {
@@ -26,6 +27,7 @@ function body_parser(req, res, next) {
   req.logplexLogs = '';
   req.setEncoding('utf8');
   req.on('data', function (chunk) {
+      console.log('app.post　chunk:' + chunk);
     req.logplexLogs += chunk;
   });
   req.on('end', next);
@@ -35,8 +37,8 @@ app.use(body_parser);
 
 app.post('/logs', function(req, res) {
     console.log('app.post開始:' );
-    console.log('app.post　req内容:' + JSON.stringify(req));
-    console.log('app.post　req内容終了:');
+    
+  
  // log_headers(req, ['Host', 'Con' ,'Content-Type' ,'Logplex-Msg-Count' ,'Logplex-Frame-Id' ,'Logplex-Drain-Token' ,'User-Agent' ,'Content-Length' ,'Connection']);
   log_body(req.logplexLogs);
     console.log('app.post終了:' );
