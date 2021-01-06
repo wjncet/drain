@@ -39,6 +39,7 @@ app.post('/logs', function(req, res) {
   res.send(201);
 });
 
-var server = app.listen(process.env.LOG_PORT, function () {
+app.set('port', process.env.PORT || 5000);
+var server = app.listen(app.get('port'), function () {
   console.log('Listening on port %d', server.address().port);
 });
