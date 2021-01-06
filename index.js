@@ -2,19 +2,19 @@ var express = require('express'),
     app = express();
 
 function log_body(body) {
-  if (process.env.LOG_BODY) {
+//  if (process.env.LOG_BODY) {
     console.log(body);
-  }
+//  }
 }
 
 function log_headers(req, headers) {
-  if (process.env.LOG_HEADERS) {
+//  if (process.env.LOG_HEADERS) {
     var interested = headers.reduce(function(str, key) {
       str += "\n" + key + ": " + req.get(key);
       return str;
     }, '');
     console.log("\n", interested, "\n");
-  }
+  //}
 }
 
 function body_parser(req, res, next) {
