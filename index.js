@@ -34,8 +34,12 @@ function body_parser(req, res, next) {
 app.use(body_parser);
 
 app.post('/logs', function(req, res) {
+    console.log('app.post開始:' );
+    console.log('app.post　req内容:' + req);
+    console.log('app.post　req内容終了:');
  // log_headers(req, ['Host', 'Con' ,'Content-Type' ,'Logplex-Msg-Count' ,'Logplex-Frame-Id' ,'Logplex-Drain-Token' ,'User-Agent' ,'Content-Length' ,'Connection']);
   log_body(req.logplexLogs);
+    console.log('app.post終了:' );
   res.send(201);
 });
 
