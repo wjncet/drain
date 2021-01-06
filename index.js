@@ -27,13 +27,24 @@ function body_parser(req, res, next) {
   req.logplexLogs = '';
   req.setEncoding('utf8');
   req.on('data', function (chunk) {
-      console.log('app.post　chunk:' + chunk);
+//      console.log('app.post　chunk:' + chunk);
     req.logplexLogs += chunk;
   });
   req.on('end', next);
 }
 
+app.use(bodyParser.json({limit: "2mb"}));
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(function(err, req, res, next) {
+    console.log(err.stack);
+    res.status(500).send(err.message);
+});
+
 app.use(body_parser);
+
+
+
+
 
 app.post('/logs', function(req, res) {
     console.log('app.post開始:' );
