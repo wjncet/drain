@@ -33,14 +33,15 @@ function body_parser(req, res, next) {
   req.on('end', next);
 }
 
-app.use(bodyParser.json({limit: "2mb"}));
+
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 app.use(function(err, req, res, next) {
     console.log(err.stack);
     res.status(500).send(err.message);
 });
 
-app.use(body_parser);
+//app.use(body_parser);
 
 
 
