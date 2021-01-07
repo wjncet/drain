@@ -76,6 +76,6 @@ var server = app.listen(app.get('port'), function () {
 
 function log_body_DB(body) {
     db.query(
-    insertSQL,
+    db.insertSQL,
     [1, 2, 3, 4], true)
 }
