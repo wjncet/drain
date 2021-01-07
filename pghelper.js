@@ -2,7 +2,7 @@ var pg = require('pg'),
     Query = require('pg').Query,
     config = require('./config'),
     Q = require('q'),
-    logger = require('winston'),
+//    logger = require('winston'),
     url = require('url'),
     databaseURL = config.databaseURL;
 
@@ -11,10 +11,10 @@ if (process.env.DATABASE_URL){
     databaseURL = databaseURL + "?ssl=true";
   }
 }
-
+/*
 exports.setLogger = function(lg){
   logger = lg;
-};
+};*/
 
 var urlParams;
 /**
@@ -51,18 +51,18 @@ exports.query = function (sql, values) {
     var pool = new pg.Pool(getUrlParams());
     pool.connect(function (err, conn, done) {
         if (err) {
-          logger.error(err);
+            console.log("connect err 発生:: "+ err);
         };
         try {
             conn.query(sql, values, function (err, result) {
                 done();
                 if (err) {
-                    logger.error(err);
+                   console.log("query err 発生1:: "+ err);
                 }
             });
         }
         catch (e) {
-            logger.error(e);
+             console.log("query err 発生2:: "+ err);
             done();
         }
     });
