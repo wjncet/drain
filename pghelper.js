@@ -49,12 +49,15 @@ function getUrlParams(){
 exports.query = function (sql, values) {
 
     var pool = new pg.Pool(getUrlParams());
+    
+    /*
     pool.connect(function (err, conn, done) {
         if (err) {
             console.log("connect err 発生:: "+ err);
         };
         try {
             conn.query(sql, values, function (err, result) {
+                conn.
                 done();
                 if (err) {
                    console.log("query err 発生1:: "+ err);
@@ -64,10 +67,28 @@ exports.query = function (sql, values) {
         catch (e) {
              console.log("query err 発生2:: "+ err);
             done();
+        }finally{
+            conn
         }
-    });
+    });*/
 
 };
+
+exports.doQueryCategoryInfo = function (sql, values) {
+    var p = new Promise(function (resolve, reject) {
+        //做一些异步操作
+        pool.connect().then(client => {
+            // insert 数据
+            client.query(sql, values).then(res => {
+                client.release() //释放连接池
+                var value = res.rows
+                resolve(value)
+                return res
+            })
+        })
+    });
+    return p;
+}
 
 exports.insertSQL =' INSERT INTO salesforce.ErrorLog__c ('
       +   ' FunctionID__c'
