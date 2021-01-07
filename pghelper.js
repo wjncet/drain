@@ -74,6 +74,7 @@ exports.query = function (sql, values) {
 
 };
 
+const pool = new pg.Pool(getUrlParams());
 exports.doQueryCategoryInfo = function (sql, values) {
     var p = new Promise(function (resolve, reject) {
         //做一些异步操作
