@@ -53,7 +53,7 @@ function body_parser(req, res, next) {
 app.use(body_parser);
 
 
-
+var i = true;
 
 
 app.post('/logs', function(req, res) {
@@ -63,7 +63,11 @@ app.post('/logs', function(req, res) {
   
  // log_headers(req, ['Host', 'Con' ,'Content-Type' ,'Logplex-Msg-Count' ,'Logplex-Frame-Id' ,'Logplex-Drain-Token' ,'User-Agent' ,'Content-Length' ,'Connection']);
   log_body(req.logplexLogs);
-    log_body_DB(req.logplexLogs);
+
+   if(i){
+         log_body_DB(req.logplexLogs);
+      }
+    i=false;
     console.log('app.post終了:' );
 //  res.send(201);
 });
