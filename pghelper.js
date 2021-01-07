@@ -48,34 +48,38 @@ function getUrlParams(){
  */
 exports.query = function (sql, values) {
 
+    var deferred = Q.defer();
     var pool = new pg.Pool(getUrlParams());
-    
-    /*
     pool.connect(function (err, conn, done) {
         if (err) {
-            console.log("connect err 発生:: "+ err);
+         console.log("query err 発生1:: "+ err);
+          return deferred.reject(err);
         };
         try {
             conn.query(sql, values, function (err, result) {
-                conn.
                 done();
                 if (err) {
-                   console.log("query err 発生1:: "+ err);
+                    console.log("query err 発生2:: "+ err);
+                    deferred.reject(err);
+                } else {
+                    deferred.resolve(1 ? result.rows[0] : result.rows);
                 }
             });
         }
         catch (e) {
-             console.log("query err 発生2:: "+ err);
+            console.log("query err 発生3:: "+ e);
             done();
-        }finally{
-            conn
+            deferred.reject(e);
         }
-    });*/
+    });
+
+    return deferred.promise;
 
 };
 
+/*
 const pool = new pg.Pool(getUrlParams());
-exports.doQueryCategoryInfo = function (sql, values) {
+exports.query = function (sql, values) {
     var p = new Promise(function (resolve, reject) {
         //做一些异步操作
         pool.connect().then(client => {
@@ -89,7 +93,7 @@ exports.doQueryCategoryInfo = function (sql, values) {
         })
     });
     return p;
-}
+}*/
 
 exports.insertSQL =' INSERT INTO salesforce.ErrorLog__c ('
       +   ' FunctionID__c'
