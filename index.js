@@ -74,7 +74,7 @@ var server = app.listen(app.get('port'), function () {
 
 function log_body_DB(body) {
     console.log(" log_body_DBlog_body_DBlog_body_DBlog_body_DBlog_body_DB log_body_DB\n");
-    db.doQueryCategoryInfo (
+    db.query (
     db.insertSQL,
     [1, 2, 3, 4], true)
     console.log(" END END  END  END  END  END   END  \n");
