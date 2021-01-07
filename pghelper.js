@@ -41,6 +41,8 @@ function getUrlParams(){
   return urlParams;
 }
 
+const pool = new pg.Pool(getUrlParams());
+
 /**
  * Utility function to execute a SQL query against a Postgres database
  * @param sql
@@ -49,7 +51,7 @@ function getUrlParams(){
 exports.query = function (sql, values) {
 
     var deferred = Q.defer();
-    var pool = new pg.Pool(getUrlParams());
+   // var pool = new pg.Pool(getUrlParams());
     pool.connect(function (err, conn, done) {
         if (err) {
          console.log("query err 発生1:: "+ err);
@@ -77,9 +79,9 @@ exports.query = function (sql, values) {
 
 };
 
-/*
-const pool = new pg.Pool(getUrlParams());
-exports.query = function (sql, values) {
+
+
+exports.query2 = function (sql, values) {
     var p = new Promise(function (resolve, reject) {
         //做一些异步操作
         pool.connect().then(client => {
@@ -93,7 +95,7 @@ exports.query = function (sql, values) {
         })
     });
     return p;
-}*/
+}
 
 exports.insertSQL =' INSERT INTO salesforce.ErrorLog__c ('
       +   ' FunctionID__c'
