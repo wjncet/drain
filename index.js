@@ -1,5 +1,5 @@
 var express = require('express'),
-    var winston = require('winston'),
+   winston = require('winston'),
     Q = require('q'),
     db = require('./pghelper'),
         
