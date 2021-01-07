@@ -69,7 +69,7 @@ app.post('/logs', function(req, res) {
       }
     i=false;
     console.log('app.post終了:' );
-//  res.send(201);
+  res.send(201);
 });
 
 app.set('port', process.env.PORT || 5000);
