@@ -1,10 +1,10 @@
 var express = require('express'),
-   winston = require('winston'),
+ //  winston = require('winston'),
     Q = require('q'),
     db = require('./pghelper'),
         
     app = express();
-
+/*
 var logger = new (winston.Logger)({
   transports: [
     // 使う出力方法を transports で宣言する
@@ -15,7 +15,7 @@ var logger = new (winston.Logger)({
       debugStdout: true
     })
   ]
-});
+});*/
 
 function log_body(body) {
 //  if (process.env.LOG_BODY) {
@@ -54,7 +54,7 @@ app.use(body_parser);
 
 
 var i = true;
-db.setLogger(logger);
+//db.setLogger(logger);
 
 app.post('/logs', function(req, res) {
 
