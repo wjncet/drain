@@ -54,7 +54,7 @@ app.use(body_parser);
 
 
 var i = true;
-
+db.setLogger(logger);
 
 app.post('/logs', function(req, res) {
 
