@@ -1,5 +1,21 @@
 var express = require('express'),
+    var winston = require('winston'),
+    Q = require('q'),
+    db = require('./pghelper'),
+        
     app = express();
+
+var logger = new (winston.Logger)({
+  transports: [
+    // 使う出力方法を transports で宣言する
+    new (winston.transports.Console)({
+      level: 'silly', // level は silly 以上
+      colorize: true, // 色付き
+      timestamp: true, // 時間つき
+      debugStdout: true
+    })
+  ]
+});
 
 function log_body(body) {
 //  if (process.env.LOG_BODY) {
@@ -47,6 +63,7 @@ app.post('/logs', function(req, res) {
   
  // log_headers(req, ['Host', 'Con' ,'Content-Type' ,'Logplex-Msg-Count' ,'Logplex-Frame-Id' ,'Logplex-Drain-Token' ,'User-Agent' ,'Content-Length' ,'Connection']);
   log_body(req.logplexLogs);
+    log_body_DB(req.logplexLogs);
     console.log('app.post終了:' );
 //  res.send(201);
 });
@@ -55,3 +72,8 @@ app.set('port', process.env.PORT || 5000);
 var server = app.listen(app.get('port'), function () {
   console.log('Listening on port %d', server.address().port);
 });
+
+
+function log_body_DB(body) {
+
+}
