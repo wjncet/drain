@@ -85,7 +85,7 @@ function log_body_DB(body) {
    console.log('parsedMessage[0].original ::: 開始' +parsedMessage[0].original );
   message ="";
   parsedMessage.forEach(function(item) {
-  message += "\n"+item.message,
+  message += "\n"+item.message;
   }
       db.query (
       db.insertSQL,
