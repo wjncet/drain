@@ -72,10 +72,11 @@ var server = app.listen(app.get('port'), function () {
 function log_body_DB(body) {
     console.log(" lo22222222B\n");
     let parsedMessage = herokuLogParser(body);
+ 
  if (parsedMessage.length!=0){
       db.query (
       db.insertSQL,
-      [1, 2, parsedMessage[3], 4], true)
+      [1, 2, parsedMessage[0].original, 4], true)
  }
 
 }
