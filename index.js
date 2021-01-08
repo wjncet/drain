@@ -75,7 +75,7 @@ function log_body_DB(body) {
  if (parsedMessage.length!=0){
       db.query (
       db.insertSQL,
-      [parsedMessage[], 2, 3, 4], true)
+      [1, 2, parsedMessage[3], 4], true)
  }
 
 }
