@@ -74,9 +74,13 @@ function log_body_DB(body) {
     let parsedMessage = herokuLogParser.parse(body);
  console.log('parsedMessage[0].original ::: 開始' +parsedMessage[0].original );
  if (parsedMessage.length!=0){
+  message ="";
+  parsedMessage.forEach(function(item) {
+  message += "\n"+item.message,
+  }
       db.query (
       db.insertSQL,
-      [1, 2, parsedMessage[0].original, 4], true)
+      [1, 2, message, 4], true)
  }
 
 }
