@@ -39,8 +39,10 @@ module.exports = class HerokuLogParser {
 
   static _extract_event_data(line,appName){
     let regex = /\<(\d+)\>(1) (\d\d\d\d-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d\d\d\d\d\d)?\+00:00) ([a-z0-9\-\_\.]+) ([a-z0-9\.-]+) ([a-z0-9\-\_\.]+) (\-) (.*)$/
-  //  let extracted_data = regex.exec(HerokuLogParser._parse_line(line))
-    let extracted_data = regex.exec(line)
+    let extracted_data = regex.exec(HerokuLogParser._parse_line(line))
+    console.log("line:: "+line);
+//    let extracted_data = regex.exec(line)
+     console.log("extracted_data:: "+extracted_data);
     let event = {}
 
     if(extracted_data === null){
