@@ -71,7 +71,7 @@ var server = app.listen(app.get('port'), function () {
 
 function log_body_DB(body) {
     console.log(" lo22222222B\n");
-    let parsedMessage = herokuLogParser(body);
+    let parsedMessage = herokuLogParser.parse(body);
  console.log('parsedMessage[0].original ::: 開始' +parsedMessage[0].original );
  if (parsedMessage.length!=0){
       db.query (
