@@ -42,7 +42,7 @@ module.exports = class HerokuLogParser {
    // let extracted_data = regex.exec(HerokuLogParser._parse_line(line))
    let extracted_data = regex.exec(line)
     let event = {}
-
+    let logDateFormat  = ''
     if(extracted_data === null){
       return null
     } else {
