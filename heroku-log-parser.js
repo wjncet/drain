@@ -5,6 +5,10 @@ module.exports = class HerokuLogParser {
 
   static parse(data,appName){
     let events = []
+       //   if(!reg.test(data)){
+      //console.log("false");
+    //    return events
+    //  }
     let lines = HerokuLogParser._split_lines(data)
 
     lines.forEach(function(line){
@@ -47,10 +51,6 @@ module.exports = class HerokuLogParser {
     if(extracted_data === null){
       return null
     } else {
-   //   if(!reg.test(extracted_data[0])){
-      //console.log("false");
-    //    return null
-    //  }
       event.priority = Number.parseInt(extracted_data[1])
       event.syslog_version = Number.parseInt(extracted_data[2])
       event.emitted_at = extracted_data[3]
