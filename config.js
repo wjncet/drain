@@ -10,6 +10,7 @@ module.exports = {
       max: parseInt(process.env.DBPOOL_MAX) || 50,
       connectionTimeoutMillis: parseInt(process.env.DBPOOL_CONNECTION_TIMEOUT_MILLIS) || 0,
       idleTimeoutMillis: parseInt(process.env.DBPOOL_IDLE_TIMEOUT_MILLIS) || 10000,
-    }
+    },
+    parttern : process.env.ERROR_PARTTERN || "Exception|異常|error"
 
 };
