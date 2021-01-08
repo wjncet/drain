@@ -3,7 +3,9 @@ var express = require('express'),
     Q = require('q'),
     db = require('./pghelper'),
     herokuLogParser = require('./heroku-log-parser.js'),
-    app = express();
+    app = express(),
+    reg = new RegExp(config.parttern,'i');
+
 /*
 var logger = new (winston.Logger)({
   transports: [
@@ -71,6 +73,12 @@ var server = app.listen(app.get('port'), function () {
 
 function log_body_DB(body) {
     console.log(" lo22222222B\n");
+ 
+ if(!reg.test(data)){
+      console.log("false");
+       return ;
+   }
+ 
     let parsedMessage = herokuLogParser.parse(body);
 
  if (parsedMessage.length!=0){
