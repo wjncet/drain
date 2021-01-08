@@ -61,7 +61,7 @@ app.use(body_parser);
 app.post('/logs', function(req, res) {
 
  // log_headers(req, ['Host', 'Con' ,'Content-Type' ,'Logplex-Msg-Count' ,'Logplex-Frame-Id' ,'Logplex-Drain-Token' ,'User-Agent' ,'Content-Length' ,'Connection']);
-  log_body(req.logplexLogs);
+  //log_body(req.logplexLogs);
   log_body_DB(req.logplexLogs);
   res.send(201);
 });
@@ -79,9 +79,10 @@ function log_body_DB(body) {
       console.log("false");
        return ;
     }
- 
+  console.log("body :: "+ body);
     let parsedMessage = herokuLogParser.parse(body);
-
+ console.log("parsedMessage :: "+ parsedMessage);
+    
   if (parsedMessage.length!=0){
    console.log('parsedMessage[0].original ::: 開始' +parsedMessage[0].original );
     message='';
