@@ -1,4 +1,5 @@
 var express = require('express'),
+    config = require('./config'),
  //  winston = require('winston'),
     Q = require('q'),
     db = require('./pghelper'),
@@ -74,22 +75,19 @@ var server = app.listen(app.get('port'), function () {
 function log_body_DB(body) {
     console.log(" lo22222222B\n");
  
- if(!reg.test(data)){
+   if(!reg.test(body)){
       console.log("false");
        return ;
-   }
+    }
  
     let parsedMessage = herokuLogParser.parse(body);
 
- if (parsedMessage.length!=0){
+  if (parsedMessage.length!=0){
    console.log('parsedMessage[0].original ::: 開始' +parsedMessage[0].original );
-  message ="";
-  parsedMessage.forEach(function(item) {
-  message += "\n"+item.message;
+    message='';
+    parsedMessage.forEach(function(item) {
+      message += "\n" + item.message;
+    }
+      db.query (db.insertSQL,[1, 2, message, 4], true);
   }
-      db.query (
-      db.insertSQL,
-      [1, 2, message, 4], true)
- }
-
 }
