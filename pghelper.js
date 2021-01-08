@@ -2,7 +2,7 @@ var pg = require('pg'),
     Query = require('pg').Query,
     config = require('./config'),
     Q = require('q'),
-//    logger = require('winston'),
+    winston = require('winston'),
     url = require('url'),
     databaseURL = config.databaseURL;
 
@@ -33,6 +33,9 @@ function getUrlParams(){
     host: params.hostname,
     port: params.port,
     database: params.pathname.split('/')[1],
+    max: config.dbPool.max,
+    connectionTimeoutMillis: config.dbPool.connectionTimeoutMillis,
+    idleTimeoutMillis: config.dbPool.idleTimeoutMillis
   };
   if (params.search !== null
     && params.search.indexOf('ssl=true') > -1){
@@ -54,14 +57,14 @@ exports.query = function (sql, values) {
    // var pool = new pg.Pool(getUrlParams());
     pool.connect(function (err, conn, done) {
         if (err) {
-         console.log("query err 発生1:: "+ err);
+         winston.error(err);
           return deferred.reject(err);
         };
         try {
             conn.query(sql, values, function (err, result) {
                 done();
                 if (err) {
-                    console.log("query err 発生2:: "+ err);
+                    winston.error(err);
                     deferred.reject(err);
                 } else {
                     deferred.resolve(1 ? result.rows[0] : result.rows);
@@ -69,7 +72,7 @@ exports.query = function (sql, values) {
             });
         }
         catch (e) {
-            console.log("query err 発生3:: "+ e);
+            winston.error(e);
             done();
             deferred.reject(e);
         }
