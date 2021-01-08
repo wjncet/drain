@@ -87,7 +87,7 @@ function log_body_DB(body) {
     message='';
     parsedMessage.forEach(function(item) {
       message += "\n" + item.message;
-    }
+    })
       db.query (db.insertSQL,[1, 2, message, 4], true);
   }
 }
