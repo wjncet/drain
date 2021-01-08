@@ -38,11 +38,9 @@ module.exports = class HerokuLogParser {
   }
 
   static _extract_event_data(line,appName){
-    let regex = /\<(\d+)\>(1) (\d\d\d\d-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d\d\d\d\d\d)?\+00:00) ([a-z0-9\-\_\.]+) ([a-z0-9\.-]+) ([a-z0-9\-\_\.]+) (\-) (.*)$/
+    let regex = /\<(\d+)\>(1) (\d\d\d\d-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d\d\d\d\d\d)?\+00:00) ([a-zA-Z0-9\-\_\.]+) ([a-zA-Z0-9\.-]+) ([a-zA-Z0-9\-\_\.]+) (\-) (.*)$/
    // let extracted_data = regex.exec(HerokuLogParser._parse_line(line))
-    console.log("line  :: "+line);
    let extracted_data = regex.exec(line)
-     console.log("extracted_data:: "+extracted_data);
     let event = {}
 
     if(extracted_data === null){
@@ -54,11 +52,10 @@ module.exports = class HerokuLogParser {
       event.hostname = extracted_data[4]
       event.appname = appName
       event.proc_id = extracted_data[5]+"["+extracted_data[6]+"]"
-      event.msg_id = null
-      event.structured_data = null
-      event.message = extracted_data[8]
+      event.message = extracted_data[3] + " " + extracted_data[8]
       event.original = extracted_data[0]
-
+      logDateFormat = new Date(event.emitted_at)
+      event.logtimestamp = logDateFormat.getTime();
       return event
     }
   }
