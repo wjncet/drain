@@ -1,14 +1,9 @@
 'use strict';
-var config = require('./config'),
-    reg = new RegExp(config.parttern,'i');
+
 module.exports = class HerokuLogParser {
 
   static parse(data,appName){
     let events = []
-       //   if(!reg.test(data)){
-      //console.log("false");
-    //    return events
-    //  }
     let lines = HerokuLogParser._split_lines(data)
 
     lines.forEach(function(line){
