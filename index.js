@@ -77,5 +77,4 @@ function log_body_DB(body) {
     db.query (
     db.insertSQL,
     [1, 2, 3, 4], true)
-    console.log(" END END  END  END  END  END   END  \n");
 }
