@@ -2,7 +2,7 @@ var express = require('express'),
  //  winston = require('winston'),
     Q = require('q'),
     db = require('./pghelper'),
-        
+    herokuLogParser = require('./heroku-log-parser.js'),
     app = express();
 /*
 var logger = new (winston.Logger)({
@@ -57,12 +57,9 @@ app.use(body_parser);
 
 app.post('/logs', function(req, res) {
 
-    console.log('app.post開始:' );
-
  // log_headers(req, ['Host', 'Con' ,'Content-Type' ,'Logplex-Msg-Count' ,'Logplex-Frame-Id' ,'Logplex-Drain-Token' ,'User-Agent' ,'Content-Length' ,'Connection']);
   log_body(req.logplexLogs);
-   log_body_DB(req.logplexLogs);
-    console.log('app.post終了:' );
+  log_body_DB(req.logplexLogs);
   res.send(201);
 });
 
@@ -74,7 +71,11 @@ var server = app.listen(app.get('port'), function () {
 
 function log_body_DB(body) {
     console.log(" lo22222222B\n");
-    db.query (
-    db.insertSQL,
-    [1, 2, 3, 4], true)
+    let parsedMessage = herokuLogParser(body);
+ if (parsedMessage.length!=0){
+      db.query (
+      db.insertSQL,
+      [parsedMessage[], 2, 3, 4], true)
+ }
+
 }
