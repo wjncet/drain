@@ -103,7 +103,7 @@ exports.query2 = function (sql, values) {
 exports.insertSQL =' INSERT INTO salesforce.ErrorLog__c ('
       +   ' FunctionID__c'
       +  ', ErrorCode__c'
-      +  ', ErrorMessage__c'
+      +  ', logmess__c'
       +  ', KeyInfomation__c'
       + ') VALUES ($1, $2, $3, $4) ';
     
