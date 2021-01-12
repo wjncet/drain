@@ -73,8 +73,6 @@ var server = app.listen(app.get('port'), function () {
 
 
 function log_body_DB(body) {
-    console.log(" lo22222222B\n");
- 
    if(!reg.test(body)){
       console.log("false");
        return ;
